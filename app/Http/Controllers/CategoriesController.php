@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller {
@@ -9,7 +10,7 @@ class CategoriesController extends Controller {
    * Display a listing of the resource.
    */
   public function index() {
-    return view('categories.index'); //folder auth-> categories -> file index
+    return view('categories.index')->with('categories', Category::all()); //folder auth-> categories -> file index
   }
 
   /**
@@ -23,7 +24,19 @@ class CategoriesController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(Request $request) {
-    //
+    $this->validate($request, [
+      'name' => 'required|unique:categories',
+    ]);
+
+    $ncategory = new Category();
+
+    Category::create([
+      'name' => $request->name,
+    ]);
+
+    session()->flash('success', 'Category created successfully.');
+
+    return redirect(route('categories.index'));
   }
 
   /**
