@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -23,12 +24,7 @@ class CategoriesController extends Controller {
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request) {
-    $this->validate($request, [
-      'name' => 'required|unique:categories',
-    ]);
-
-    $ncategory = new Category();
+  public function store(CreateCategoryRequest $request) {
 
     Category::create([
       'name' => $request->name,
