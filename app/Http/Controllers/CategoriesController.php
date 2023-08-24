@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\Categories\CreateCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoriesRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoriesController extends Controller {
   /**
@@ -45,15 +45,23 @@ class CategoriesController extends Controller {
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(string $id) {
-    //
+  public function edit(Category $category) {
+    return view('categories.create')->with('category', $category);
+
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id) {
-    //
+  public function update(UpdateCategoriesRequest $request, Category $category) {
+
+    $category->update([
+      'name' => $request->name,
+    ]);
+
+    session()->flash('success', 'Category updated successfully.');
+
+    return redirect(route('categories.index'));
   }
 
   /**
