@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Posts\CreatePostRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller {
@@ -10,7 +11,7 @@ class PostsController extends Controller {
    * Display a listing of the resource.
    */
   public function index() {
-    return view('posts.index');
+    return view('posts.index')->with('posts', Post::all());
   }
 
   /**
@@ -28,7 +29,7 @@ class PostsController extends Controller {
     $image = $request->image->store('posts');
 
     // create the post
-    $post = \App\Models\Post::create([
+    Post::create([
       'title'       => $request->title,
       'description' => $request->description,
       'content'     => $request->content,
