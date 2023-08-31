@@ -67,11 +67,23 @@ class PostsController extends Controller {
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Post $post) {
-    $post->delete();
+  public function destroy($id) {
+    $post = Post::withTrashed()->where('id', $id)->firstOrFail();
 
-    session()->flash('success', 'Post trashed succesfully.');
+    if ($post->trashed()) {
+      $post->forceDelete();
+    } else {
+      $post->delete();
+    }
+
+    session()->flash('success', 'Post deleted succesfully.');
 
     return redirect(route('posts.index'));
+  }
+
+  public function trashed(Post $post) {
+    $trashed = Post::withTrashed()->get();
+
+    return view('posts.index')->with('posts', $trashed);
   }
 }
