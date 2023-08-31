@@ -67,7 +67,11 @@ class PostsController extends Controller {
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id) {
-    //
+  public function destroy(Post $post) {
+    $post->delete();
+
+    session()->flash('success', 'Post trashed succesfully.');
+
+    return redirect(route('posts.index'));
   }
 }
