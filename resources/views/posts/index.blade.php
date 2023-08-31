@@ -8,6 +8,7 @@
 <div class="card card-default">
     <div class="card-header">Posts</div>
     <div class="card-body">
+        @if ($posts->count() > 0)
         <table class="table">
             <thead>
                 <th>Image</th>
@@ -23,25 +24,30 @@
                         <img src="{{ asset( $post->image) }}" width="120px" height="60px" alt="">
                     </td>
                     <td>
-                        {{ $post->image }}
-                    </td>
-                    <td>
                         {{ $post->title}}
                     </td>
-                    <td>
-                        <a href="" class="btn btn-info btn-sm">Edit</a>
-                    </td>
+                    @if (!$post->trashed())
+                        <td>
+                            <a href="" class="btn btn-info btn-sm">Edit</a>
+                        </td>
+                    @endif
                     <td>
                         <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button  type='submit' class="btn btn-danger btn-sm">Trash</button>
+                            @csrf
+                            @method('DELETE')
+                            <button  type='submit' class="btn btn-danger btn-sm">
+                                {{ $post->trashed() ? 'Delete': 'Trash' }}
+                            </button>
                         </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+
+        @else
+           <h3 class="text-center">No Posts Yet</h3>
+        @endif
     </div>
 </div>
 
