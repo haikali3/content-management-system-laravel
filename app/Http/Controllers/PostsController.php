@@ -31,10 +31,11 @@ class PostsController extends Controller {
 
     // create the post
     Post::create([
-      'title'       => $request->title,
-      'description' => $request->description,
-      'content'     => $request->content,
-      'image'       => $image,
+      'title'        => $request->title,
+      'description'  => $request->description,
+      'content'      => $request->content,
+      'image'        => $image,
+      'published_at' => $request->published_at,
     ]);
 
     // flash message
