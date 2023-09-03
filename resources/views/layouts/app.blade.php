@@ -15,6 +15,13 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        .btn-info {
+            color: #fff;
+        }
+    </style>
+
     @yield('css')
 </head>
 <body>
