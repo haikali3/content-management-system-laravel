@@ -24,5 +24,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('categories', CategoriesController::class);
 Route::resource('posts', PostsController::class);
-Route::get('trashed-posts', [App\Http\Controllers\PostsController::class, 'trashed'])->name('trashed-posts.index');
-Route::put('restore-posts/{post}', [App\Http\Controllers\PostsController::class, 'restore'])->name('restore-posts');
+Route::get('trashed-posts', [PostsController::class, 'trashed'])->name('trashed-posts.index');
+Route::put('restore-posts/{post}', [PostsController::class, 'restore'])->name('restore-posts');
