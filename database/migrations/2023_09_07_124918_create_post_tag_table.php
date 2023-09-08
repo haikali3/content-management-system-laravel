@@ -9,7 +9,7 @@ return new class extends Migration {
    * Run the migrations.
    */
   public function up(): void {
-    Schema::create('tags', function (Blueprint $table) {
+    Schema::create('post_tag', function (Blueprint $table) {
       $table->id();
       $table->integer('post_id');
       $table->integer('tag_id');
@@ -21,6 +21,6 @@ return new class extends Migration {
    * Reverse the migrations.
    */
   public function down(): void {
-    Schema::dropIfExists('tags');
+    Schema::dropIfExists('post_tag');
   }
 };
