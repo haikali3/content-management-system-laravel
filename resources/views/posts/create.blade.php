@@ -22,7 +22,7 @@
 
             <div class="form-group mb-2">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols=5" rows="5" class="form-control">
+                <textarea name="description" id="description" cols="5" rows="5" class="form-control">
                     {{ isset($post) ? $post->description:'' }}
                 </textarea>
             </div>
@@ -39,7 +39,7 @@
 
             @if (isset($post))
                 <div class="form-group">
-                    <img src="{{ asset($post->image) }}" alt="" style="width: 30%">
+                    <img src="{{ URL::asset('storage/' . $post->image) }}" alt="" style="width: 30%">
                 </div>
             @endif
             <div class="form-group mb-3">
@@ -63,6 +63,25 @@
                     @endforeach
                 </select>
             </div>
+
+            @if ($tags->count() > 0)
+                <div class="form-group">
+                    <label for="tags">tags</label>
+                    <select name="tags[]" id="tags" class="form-control" multiple>
+                        @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}"
+                            @if (isset($post))
+                                @if ($post->hasTag($tag->id))
+                                    selected
+                                @endif
+                            @endif
+                            >
+                            {{ $tag->name }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
 
             <div class="form-group">
                 <button type="submit" class="btn btn-success">
