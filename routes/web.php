@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+  Route::get('home', [HomeController::class, 'index'])->name('home'); //format like this go
   Route::resource('categories', CategoriesController::class);
   Route::resource('posts', PostsController::class);
   Route::resource('tags', TagsController::class);
@@ -32,5 +34,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
-  Route::get('users', [UsersController::class, 'index'])->name('users.index');
+  Route::get('users', [UsersController::class, 'index'])->name('users.index'); //add use above
 });
