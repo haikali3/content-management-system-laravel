@@ -15,5 +15,6 @@ class UsersController extends Controller {
     $user->save();
     session()->flash('success', 'User made admin successfully.');
     return redirect(route('users.index'));
+
   }
 }
