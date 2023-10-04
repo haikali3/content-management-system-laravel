@@ -22,6 +22,7 @@
                 <tr>
                     <td>
                         <img width="40px" height="40px" style="border-radius: 50%" src="{{ Gravatar::get($user->email) }}" alt="">
+
                     </td>
                     <td>
                         {{ $user->name }}
